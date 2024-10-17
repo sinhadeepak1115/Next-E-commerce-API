@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 const AppBar = () => {
   const session = useSession();
+  console.log("Session Data:", session);
   return (
     <div>
       <div className="flex justify-between">
