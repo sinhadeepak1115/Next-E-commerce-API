@@ -1,14 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const AppBar = () => {
+  const session = useSession();
   return (
     <div>
       <div className="flex justify-between">
         <div>E-api</div>
         <div>
-          <Button onClick={() => console.log("Button clicked!")}>SignIn</Button>
+          {session.data?.user && (
+            <Button onClick={() => signOut()}>SignOut</Button>
+          )}
+          {!session.data?.user && (
+            <Button onClick={() => signIn()}>SignIn</Button>
+          )}
         </div>
       </div>
       <hr />
