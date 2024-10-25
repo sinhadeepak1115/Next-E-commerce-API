@@ -38,14 +38,14 @@ export const GET = async (req: NextRequest) => {
 //   }
 // };
 
-// for testing
+//for testing
 export const POST = async (req: NextRequest) => {
   const session = await getServerSession();
 
   try {
     const {
-      name = "Test User",
-      email = "tesasdft@example.com",
+      name = "Test hiaUser",
+      email = "testdsf@example.com",
       image = "default.jpg",
     } = session?.user || {};
 
@@ -57,7 +57,6 @@ export const POST = async (req: NextRequest) => {
         status: 400,
       });
     }
-
     const user = await prisma.user.create({
       data: { name: name, email: email, image: image },
     });
