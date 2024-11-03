@@ -1,5 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
+import Loading from "./loading";
 
 interface User {
   id: string;
@@ -10,6 +11,7 @@ interface User {
 
 export default function UserPage() {
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -18,6 +20,9 @@ export default function UserPage() {
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+        //add finally block
       }
     };
     fetchUsers();
@@ -33,7 +38,9 @@ export default function UserPage() {
 
         <hr className="w-48 h-1 mx-auto my-4 bg-blue-200 border-0 rounded md:my-4 dark:bg-gray-700" />
         <h2 className="text-xl font-bold">Users</h2>
-        <Suspense fallback={<div>Loading...</div>}>
+        {loading ? (
+          <Loading />
+        ) : (
           <div className="space-y-6">
             {users.map((user) => (
               <div key={user.id} className="border p-4 rounded-lg shadow-sm">
@@ -43,7 +50,7 @@ export default function UserPage() {
               </div>
             ))}
           </div>
-        </Suspense>
+        )}
       </div>
     </>
   );
