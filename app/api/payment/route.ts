@@ -20,16 +20,16 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const session = await getServerSession();
+  // const session = await getServerSession();
   try {
-    if (!session || !session.user) {
-      return NextResponse.json(
-        {
-          error: "Unauthorized",
-        },
-        { status: 401 },
-      );
-    }
+    //   if (!session || !session.user) {
+    //     return NextResponse.json(
+    //       {
+    //         error: "Unauthorized",
+    //       },
+    //       { status: 401 },
+    //     );
+    //   }
     const { amount, status, userId } = await req.json();
     const payment = await prisma.payment.create({
       data: {
